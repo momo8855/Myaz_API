@@ -1,0 +1,1 @@
+slowonly_omnisource_pretrained_r101_8x8x1_20e_ava_rgb_20201217-16378594.pth filter=lfs diff=lfs merge=lfs -text
