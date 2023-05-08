@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import user, file, task
+from .routers import user, file, task, youtube
 from .config import settings
 
 app = FastAPI()
@@ -18,3 +18,4 @@ app.add_middleware(
 app.include_router(user.router)
 app.include_router(file.router)
 app.include_router(task.router)
+app.include_router(youtube.router)

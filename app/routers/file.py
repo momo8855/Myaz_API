@@ -33,6 +33,7 @@ async def create_upload_video(video: UploadFile = File(...), db = Depends(get_db
             status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, detail=f"You have exceeded your 5 files limit. Please delete a file and try again")
     # Get video size
     video_size = await utils.get_video_size(video)
+    print(video_size)
     if video_size > 50:
         raise HTTPException(
             status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, detail=f"You can only upload files less than 50 mb")
@@ -47,15 +48,12 @@ async def create_upload_video(video: UploadFile = File(...), db = Depends(get_db
         raise HTTPException(status_code=400, detail='Please rename your file to be max 50 character')
     
     # Create the videos folder for this user if it doesn't exist
+    await video.seek(0)
     os.makedirs(f"{current_user.id}_uploaded", exist_ok=True)
     # Save the video to the "videos" folder
     file_path = f"{current_user.id}_uploaded/{video.filename}"
-    with open(file_path, "wb") as buffer:
-        while True:
-            chunk = await video.read(1024)
-            if not chunk:
-                break
-            buffer.write(chunk)
+    with open(file_path, "wb+") as file_object:
+      file_object.write(video.file.read())
 
     cursor.close()
     conn.close()

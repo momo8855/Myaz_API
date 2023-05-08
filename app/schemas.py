@@ -41,3 +41,6 @@ class FileName(BaseModel):
 
 class Path(BaseModel):
     path: str
+
+class YoutubeLink(BaseModel):
+    link:str
