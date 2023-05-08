@@ -335,7 +335,7 @@ def get_actions_youtube(stream, collection_name, file):
     imgs=[]
     while True:
         img = stream.read()
-        if ret == False:
+        if stream is None:
             break
         h, w, _ = img.shape
         new_w, new_h = mmcv.rescale_size((w, h), (256, np.Inf))
