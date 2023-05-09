@@ -8,8 +8,8 @@ from ..ppe import get_ppe_violation
 import cv2
 import os
 import ffmpeg
-from ..action import get_actions, get_actions_camera
-from ..performance import performance, performance_camera
+from ..action import get_actions
+from ..performance import performance
 from vidgear.gears import CamGear
 
 router = APIRouter(

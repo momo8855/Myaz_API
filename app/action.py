@@ -145,18 +145,19 @@ def get_actions(cap, collection_name, file):
                     imgs = []
                     imgs_original=[]
                     scores = result[0].pred_instances.scores
-                    print(scores)
                     prediction = []
                     # N proposals
                     for i in range(tensor_tracker.shape[0]):
                         prediction.append([results_tracker[i][4], [label_map[64], scores[i][64]] , [label_map[54], scores[i][54]], [label_map[15], scores[i][15]]])
+                    
+                    print(prediction)   
 
                     for i in range(len(results_tracker)):
                         if prediction[i][1][1] > 0.1:
                             results_tracker[i][6].append('fight')
-                        if prediction[i][2][1] > 0.3:
+                        if prediction[i][2][1] > 0.1:
                             results_tracker[i][6].append('smoke')
-                        if prediction[i][3][1] > 0.5:
+                        if prediction[i][3][1] > 0.1:
                             results_tracker[i][6].append('phone')
 
                     print(results_tracker)

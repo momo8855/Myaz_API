@@ -25,6 +25,7 @@ def mark_attendance(cap, collection_name, collection_name_attendance, file):
             for face_measure, face_location in zip(measures, detected_faces):
                 matches = fc.compare_faces(measurements_list, face_measure)
                 face_distances = fc.face_distance(measurements_list, face_measure)
+                print(face_distances)
                 match_index = np.argmin(face_distances)
                 if matches[match_index]:
                     id = employee_id_list[match_index]
